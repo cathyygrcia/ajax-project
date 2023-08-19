@@ -1,5 +1,7 @@
 const $images = document.querySelector('.images');
 const $search = document.querySelector('.search');
+const $genreButton = document.querySelector('.genre');
+const $artistButton = document.querySelector('.artist');
 
 function formatDate(inputDate) {
   const parts = inputDate.split('-');
@@ -48,50 +50,92 @@ function getImage(DMA) {
   xhr.send();
 }
 
-$search.addEventListener('keydown', function (event) {
-  if (event.key === 'Enter') {
-    const xhr = new XMLHttpRequest();
-    const searchValue = event.target.value;
-    xhr.open('GET', `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=${searchValue}&size=30&apikey=aeMvG0zyzdpO1jAkGyCZeGxxQK4vIfpe`);
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', function () {
-      const response = xhr.response._embedded.events;
-      // console.log(response);
-      $images.innerHTML = '';
+$genreButton.addEventListener('click', function (event) {
 
-      for (let i = 0; i < response.length; i++) {
-        const $imgWrapper = document.createElement('div');
-        const $img = document.createElement('img');
+  $search.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      const xhr = new XMLHttpRequest();
+      const searchValue = event.target.value;
+      xhr.open('GET', `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=${searchValue}&size=30&apikey=aeMvG0zyzdpO1jAkGyCZeGxxQK4vIfpe`);
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', function () {
+        const response = xhr.response._embedded.events;
+        $images.innerHTML = '';
 
-        const $artistName = document.createElement('p');
-        $artistName.textContent = response[i].name;
+        for (let i = 0; i < response.length; i++) {
+          const $imgWrapper = document.createElement('div');
+          const $img = document.createElement('img');
 
-        const $venue = document.createElement('p');
-        $venue.textContent = response[i]._embedded.venues[0].name;
+          const $artistName = document.createElement('p');
+          $artistName.textContent = response[i].name;
 
-        const $date = document.createElement('p');
-        const formattedDate = formatDate(response[i].dates.start.localDate);
-        $date.textContent = `${formattedDate}`; // Include 'Date: ' prefix
+          const $venue = document.createElement('p');
+          $venue.textContent = response[i]._embedded.venues[0].name;
 
-        for (let j = 0; j < response[i].images.length; j++) {
-          const currentImage = response[i].images[j];
-          if (currentImage.ratio === '4_3') {
-            $img.src = currentImage.url;
+          const $date = document.createElement('p');
+          const formattedDate = formatDate(response[i].dates.start.localDate);
+          $date.textContent = `${formattedDate}`; // Include 'Date: ' prefix
+
+          for (let j = 0; j < response[i].images.length; j++) {
+            const currentImage = response[i].images[j];
+            if (currentImage.ratio === '4_3') {
+              $img.src = currentImage.url;
+            }
           }
+
+          $imgWrapper.appendChild($img);
+          $imgWrapper.appendChild($artistName);
+          $imgWrapper.appendChild($venue);
+          $imgWrapper.appendChild($date);
+          $imgWrapper.classList.add('column-third');
+          $images.appendChild($imgWrapper);
+
         }
 
-        $imgWrapper.appendChild($img);
-        $imgWrapper.appendChild($artistName);
-        $imgWrapper.appendChild($venue);
-        $imgWrapper.appendChild($date);
-        $imgWrapper.classList.add('column-third');
-        $images.appendChild($imgWrapper);
+      });
+      xhr.send();
+    }
+  });
+});
 
-      }
+$artistButton.addEventListener('click', function (event) {
+  $search.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+      const xhr = new XMLHttpRequest();
+      const searchValue = event.target.value;
+      xhr.open('GET', `https://app.ticketmaster.com/discovery/v2/attractions.json?keyword=${searchValue}&apikey=aeMvG0zyzdpO1jAkGyCZeGxxQK4vIfpe`);
+      xhr.responseType = 'json';
+      xhr.addEventListener('load', function () {
+        const response = xhr.response._embedded.attractions;
+        $images.innerHTML = '';
 
-    });
-    xhr.send();
-  }
+        for (let i = 0; i < response.length; i++) {
+          const $imgWrapper = document.createElement('div');
+          const $img = document.createElement('img');
+
+          const $artistName = document.createElement('p');
+          $artistName.textContent = response[i].name;
+
+          for (let j = 0; j < response[i].images.length; j++) {
+            const currentImage = response[i].images[j];
+            if (currentImage.ratio === '4_3') {
+              $img.src = currentImage.url;
+            }
+          }
+
+          $imgWrapper.appendChild($img);
+          $imgWrapper.appendChild($artistName);
+          // $imgWrapper.appendChild($venue);
+          // $imgWrapper.appendChild($date);
+          $imgWrapper.classList.add('column-third');
+          $images.appendChild($imgWrapper);
+
+        }
+
+      });
+      xhr.send();
+    }
+  });
 });
 
 const dmaArray = [

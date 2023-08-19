@@ -11,11 +11,16 @@ function formatDate(inputDate) {
   return `${month}/${day}/${year}`;
 }
 
+function showSearchBar() {
+  $search.classList.remove('hidden');
+}
+
 function getImage(DMA) {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=${DMA}&apikey=aeMvG0zyzdpO1jAkGyCZeGxxQK4vIfpe`);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    $search.classList.add('hidden');
     const response = xhr.response._embedded.events;
     for (let i = 0; i < response.length; i++) {
       const $imgWrapper = document.createElement('div');
@@ -51,8 +56,9 @@ function getImage(DMA) {
 }
 
 $genreButton.addEventListener('click', function (event) {
-
+  showSearchBar();
   $search.addEventListener('keydown', function (event) {
+
     if (event.key === 'Enter') {
       const xhr = new XMLHttpRequest();
       const searchValue = event.target.value;
@@ -99,7 +105,9 @@ $genreButton.addEventListener('click', function (event) {
 });
 
 $artistButton.addEventListener('click', function (event) {
+  showSearchBar();
   $search.addEventListener('keydown', function (event) {
+
     if (event.key === 'Enter') {
       const xhr = new XMLHttpRequest();
       const searchValue = event.target.value;
@@ -125,8 +133,6 @@ $artistButton.addEventListener('click', function (event) {
 
           $imgWrapper.appendChild($img);
           $imgWrapper.appendChild($artistName);
-          // $imgWrapper.appendChild($venue);
-          // $imgWrapper.appendChild($date);
           $imgWrapper.classList.add('column-third');
           $images.appendChild($imgWrapper);
 

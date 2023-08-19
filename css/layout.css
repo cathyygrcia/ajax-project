@@ -21,3 +21,56 @@
   display: flex;
   justify-content: center;
 }
+
+.search.hidden {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .images {
+    justify-content: center;
+  }
+
+  .column-third {
+    display: flex;
+    flex-basis: calc(100% - 20px);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .button {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  span.discover {
+    font-size: 32px;
+    white-space: nowrap;
+    padding-left: 20px;
+  }
+
+  div.row {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .favorites {
+    font-size: 16px;
+  }
+
+  span.favorites {
+    padding: 10px;
+  }
+
+  .image-container {
+    max-width: 1800px;
+    margin: 0 auto;
+  }
+
+  input.search {
+    width: 250px;
+  }
+}

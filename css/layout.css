@@ -1,0 +1,23 @@
+.image-container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.column-third {
+  flex-basis: calc(33.33% - 16px);
+  padding: 8px;
+  margin-bottom: 16px;
+  border-radius: 10px;
+  margin-right: 0;
+}
+
+.column-full {
+  display: flex;
+  justify-content: center;
+}

@@ -1,20 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Reggae+One&family=Tektur&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
   <header>
+    <div class="container">
+      <nav class="navbar column-full">
+        <span class="discover">Discover Me</span>
+        <span class="favorites">Favorites<i class="fas fa-heart"></i></span>
+      </nav>
+    </div>
   </header>
-  <main>
+  <main class="image-container">
+    <div class="overlay"></div>
+    <div class="row">
+      <div class="column-full search hidden">
+        <input type="search" placeholder="Search" class="search">
+      </div>
+    </div>
+    <div class="row">
+      <div class="column-full button">
+        <button type="button" class="artist">Search by Artist</button>
+        <button type="button" class="genre">Search by Genre</button>
+      </div>
+    </div>
+    <div class="row images">
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>

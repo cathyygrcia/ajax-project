@@ -34,7 +34,7 @@ function getImage(DMA) {
 
       const $date = document.createElement('p');
       const formattedDate = formatDate(response[i].dates.start.localDate);
-      $date.textContent = `${formattedDate}`; // Include 'Date: ' prefix
+      $date.textContent = `${formattedDate}`;
 
       for (let j = 0; j < response[i].images.length; j++) {
         const currentImage = response[i].images[j];
@@ -57,6 +57,8 @@ function getImage(DMA) {
 
 $genreButton.addEventListener('click', function (event) {
   showSearchBar();
+  $artistButton.classList.remove('green');
+  $genreButton.classList.add('green');
   $search.addEventListener('keydown', function (event) {
 
     if (event.key === 'Enter') {
@@ -106,6 +108,8 @@ $genreButton.addEventListener('click', function (event) {
 
 $artistButton.addEventListener('click', function (event) {
   showSearchBar();
+  $genreButton.classList.remove('green');
+  $artistButton.classList.add('green');
   $search.addEventListener('keydown', function (event) {
 
     if (event.key === 'Enter') {

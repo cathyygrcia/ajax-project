@@ -78,7 +78,7 @@ input::placeholder {
 .column-third img {
   width: 100%;
   height: auto;
-  border-radius: 10px;
+  border-radius: 60px;
 }
 
 p {
@@ -96,4 +96,14 @@ button {
   margin-right: 10px;
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.artist.green {
+  background-color: rgb(13, 34, 37, 0.6);
+  color: white;
+}
+
+.genre.green {
+  background-color: rgb(13, 34, 37, 0.6);
+  color: white;
 }
